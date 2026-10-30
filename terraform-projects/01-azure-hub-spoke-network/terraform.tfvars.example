@@ -1,0 +1,87 @@
+location            = "eastus2"
+resource_group_name = "rg-enterprise-network-hub-prod"
+
+tags = {
+  Environment = "Production"
+  Architect   = "Yogesh Pujari"
+  ManagedBy   = "Terraform"
+  Tier        = "Hub-Spoke-Network"
+}
+
+virtual_networks = {
+  hub = {
+    name          = "vnet-hub-eastus2-prod"
+    address_space = ["10.100.0.0/16"]
+    dns_servers   = []
+    subnets = {
+      firewall = {
+        name             = "AzureFirewallSubnet"
+        address_prefixes = ["10.100.0.0/24"]
+      }
+      gateway = {
+        name             = "GatewaySubnet"
+        address_prefixes = ["10.100.1.0/24"]
+      }
+      shared_runners = {
+        name              = "snet-shared-ci-runners"
+        address_prefixes  = ["10.100.2.0/24"]
+        service_endpoints = ["Microsoft.Storage", "Microsoft.KeyVault"]
+      }
+    }
+  }
+
+  spoke_app = {
+    name          = "vnet-spoke-app-prod"
+    address_space = ["10.101.0.0/16"]
+    dns_servers   = ["10.100.0.4"] # Central Azure Firewall IP
+    subnets = {
+      app_tier = {
+        name             = "snet-app-tier"
+        address_prefixes = ["10.101.1.0/24"]
+      }
+      db_tier = {
+        name             = "snet-db-tier"
+        address_prefixes = ["10.101.2.0/24"]
+      }
+      private_endpoints = {
+        name                              = "snet-private-endpoints"
+        address_prefixes                  = ["10.101.3.0/24"]
+        private_endpoint_network_policies = "Disabled"
+      }
+    }
+  }
+}
+
+route_tables = {
+  rt_spoke_egress = {
+    name                          = "rt-spoke-to-firewall-prod"
+    disable_bgp_route_propagation = false
+    routes = {
+      default_egress = {
+        name                   = "udr-default-to-firewall"
+        address_prefix         = "0.0.0.0/0"
+        next_hop_type          = "VirtualAppliance"
+        next_hop_in_ip_address = "10.100.0.4"
+      }
+    }
+  }
+}
+
+network_security_groups = {
+  nsg_app_tier = {
+    name = "nsg-app-tier-prod"
+    security_rules = {
+      allow_https_in = {
+        name                    = "AllowHTTPSInbound"
+        priority                = 100
+        direction               = "Inbound"
+        access                  = "Allow"
+        protocol                = "Tcp"
+        source_port_range       = "*"
+        destination_port_range  = "443"
+        source_address_prefix   = "VirtualNetwork"
+        destination_address_prefix = "VirtualNetwork"
+      }
+    }
+  }
+}

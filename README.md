@@ -81,6 +81,28 @@ Here is a sharp summary of my 10-year production track record, architectural pil
 
 ---
 
+## 🚀 Featured Enterprise Terraform Landing Zone Projects
+
+Production-grade Infrastructure as Code modules adhering to advanced architectural patterns (`for_each` over `map(object)`, dynamic blocks, and strict semantic versioning):
+
+* [**01. Enterprise CAF Hub-and-Spoke Network Module**](./terraform-projects/01-azure-hub-spoke-network)
+  * **Architecture Pattern:** Data-driven VNet and Subnet generation via flattened composite keys; dynamic UDRs directing `0.0.0.0/0` traffic to Azure Firewall Premium.
+  * **Key Features:** Automated bidirectional VNet peering, Network Security Groups with dynamic security rules, zero overlapping CIDRs.
+* [**02. Enterprise Governance & Policy as Code Landing Zone**](./terraform-projects/02-azure-governance-policy-landingzone)
+  * **Architecture Pattern:** Recursive Management Group hierarchy with automated initiative assignment using `for_each` over `map(object)`.
+  * **Key Features:** Built-in CIS Azure Foundations Benchmark and MCSB policy enforcement with System-Assigned Managed Identity remediation.
+* [**03. Zero-Trust Azure PaaS Private Endpoint Mesh**](./terraform-projects/03-azure-private-endpoints-paas-mesh)
+  * **Architecture Pattern:** Multi-PaaS private endpoint automation with dynamic `private_dns_zone_group` and Hub Private DNS Zone links.
+  * **Key Features:** Complete public internet isolation for Key Vaults, Storage Accounts, and Databases with RFC 1918 private addressing.
+* [**04. Hardened Enterprise Azure Kubernetes Service (AKS) Cluster**](./terraform-projects/04-azure-enterprise-aks-landing-zone)
+  * **Architecture Pattern:** Isolated system node pool with dynamic user, GPU, and FinOps Spot node pools via `for_each` over `map(object)`.
+  * **Key Features:** Azure CNI Overlay, Workload Identity, Key Vault Secrets Provider CSI driver, and node-level taints/labels.
+* [**05. FinOps Multi-AZ VM Scale Sets (VMSS) Workload Engine**](./terraform-projects/05-azure-finops-vmss-workloads)
+  * **Architecture Pattern:** High-availability VMSS across Availability Zones (`1`, `2`, `3`) with dynamic metric-driven autoscale rules.
+  * **Key Features:** Automated scale-out under peak CPU and automated scale-in during idle periods to eliminate cloud compute waste.
+
+---
+
 ## 🏛️ Enterprise Reference Architecture Blueprints
 
 ### 1. Enterprise Agentic SRE & Model Context Protocol (MCP) Mesh

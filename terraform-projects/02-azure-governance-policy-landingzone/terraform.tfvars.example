@@ -1,0 +1,50 @@
+root_management_group_display_name = "Enterprise-Core-Root"
+
+management_groups = {
+  mg_platform = {
+    display_name               = "Platform Shared Services"
+    parent_management_group_id = null
+    subscription_ids           = []
+  }
+  mg_identity = {
+    display_name               = "Identity & Directory Services"
+    parent_management_group_id = "mg_platform"
+    subscription_ids           = []
+  }
+  mg_management = {
+    display_name               = "Management & Log Ingestion"
+    parent_management_group_id = "mg_platform"
+    subscription_ids           = []
+  }
+  mg_connectivity = {
+    display_name               = "Connectivity & Hub Routing"
+    parent_management_group_id = "mg_platform"
+    subscription_ids           = []
+  }
+  mg_landing_zones = {
+    display_name               = "Workloads & Landing Zones"
+    parent_management_group_id = null
+    subscription_ids           = []
+  }
+  mg_corp = {
+    display_name               = "Corp Internal Applications"
+    parent_management_group_id = "mg_landing_zones"
+    subscription_ids           = []
+  }
+  mg_online = {
+    display_name               = "Online Public Internet Facing"
+    parent_management_group_id = "mg_landing_zones"
+    subscription_ids           = []
+  }
+}
+
+policy_assignments = {
+  cis_benchmark = {
+    name                 = "policy-cis-azure-benchmark"
+    display_name         = "Enforce CIS Microsoft Azure Foundations Benchmark v2.0"
+    policy_definition_id = "/providers/Microsoft.Authorization/policySetDefinitions/064e47a1-059d-47c4-a697-70498b88f276"
+    management_group_key = "mg_landing_zones"
+    enforce              = true
+    parameters           = null
+  }
+}

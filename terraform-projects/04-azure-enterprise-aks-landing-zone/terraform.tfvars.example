@@ -1,0 +1,59 @@
+location            = "eastus2"
+resource_group_name = "rg-enterprise-aks-prod"
+cluster_name        = "aks-enterprise-core-prod"
+dns_prefix          = "aks-prod-k8s"
+kubernetes_version  = "1.28.5"
+vnet_subnet_id      = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-enterprise-network-hub-prod/providers/Microsoft.Network/virtualNetworks/vnet-spoke-app-prod/subnets/snet-app-tier"
+
+tags = {
+  Environment = "Production"
+  Architect   = "Yogesh Pujari"
+  ManagedBy   = "Terraform"
+  Platform    = "Kubernetes-Enterprise"
+}
+
+system_node_pool = {
+  name                = "syspool"
+  vm_size             = "Standard_D4ds_v5"
+  enable_auto_scaling = true
+  min_count           = 3
+  max_count           = 5
+  os_disk_size_gb     = 128
+  zones               = ["1", "2", "3"]
+}
+
+user_node_pools = {
+  compute_general = {
+    name                = "workload"
+    vm_size             = "Standard_D8ds_v5"
+    enable_auto_scaling = true
+    min_count           = 3
+    max_count           = 20
+    os_disk_size_gb     = 256
+    zones               = ["1", "2", "3"]
+    node_labels = {
+      "workload.type" = "production-apps"
+    }
+    node_taints = []
+  }
+
+  ai_inference_spot = {
+    name                = "aispot"
+    vm_size             = "Standard_NC6s_v3"
+    enable_auto_scaling = true
+    min_count           = 0
+    max_count           = 8
+    os_disk_size_gb     = 256
+    priority            = "Spot"
+    eviction_policy     = "Delete"
+    spot_max_price      = -1
+    zones               = ["1", "2"]
+    node_labels = {
+      "workload.type" = "agentic-ai-inference"
+      "cost.tier"     = "spot-finops"
+    }
+    node_taints = [
+      "sku=gpu:NoSchedule"
+    ]
+  }
+}

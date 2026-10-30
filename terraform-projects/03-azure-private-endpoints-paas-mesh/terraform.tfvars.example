@@ -1,0 +1,40 @@
+location            = "eastus2"
+resource_group_name = "rg-enterprise-paas-mesh-prod"
+subnet_id           = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-enterprise-network-hub-prod/providers/Microsoft.Network/virtualNetworks/vnet-spoke-app-prod/subnets/snet-private-endpoints"
+
+tags = {
+  Environment = "Production"
+  Architect   = "Yogesh Pujari"
+  ManagedBy   = "Terraform"
+  Security    = "Zero-Trust-Private-Link"
+}
+
+private_dns_zones = {
+  privatelink_vault = {
+    name              = "privatelink.vaultcore.azure.net"
+    link_vnet_id      = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-enterprise-network-hub-prod/providers/Microsoft.Network/virtualNetworks/vnet-hub-eastus2-prod"
+    auto_registration = false
+  }
+  privatelink_blob = {
+    name              = "privatelink.blob.core.windows.net"
+    link_vnet_id      = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-enterprise-network-hub-prod/providers/Microsoft.Network/virtualNetworks/vnet-hub-eastus2-prod"
+    auto_registration = false
+  }
+}
+
+private_endpoints = {
+  pe_keyvault = {
+    name                           = "pe-corp-keyvault-prod"
+    private_connection_resource_id = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-security-prod/providers/Microsoft.KeyVault/vaults/kv-enterprise-core-prod"
+    subresource_names              = ["vault"]
+    is_manual_connection           = false
+    private_dns_zone_ids           = ["/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-enterprise-paas-mesh-prod/providers/Microsoft.Network/privateDnsZones/privatelink.vaultcore.azure.net"]
+  }
+  pe_storage = {
+    name                           = "pe-app-blob-storage-prod"
+    private_connection_resource_id = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-storage-prod/providers/Microsoft.Storage/storageAccounts/stenterpriseblobprod"
+    subresource_names              = ["blob"]
+    is_manual_connection           = false
+    private_dns_zone_ids           = ["/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-enterprise-paas-mesh-prod/providers/Microsoft.Network/privateDnsZones/privatelink.blob.core.windows.net"]
+  }
+}

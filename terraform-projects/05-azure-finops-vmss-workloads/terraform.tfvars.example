@@ -1,0 +1,50 @@
+location            = "eastus2"
+resource_group_name = "rg-enterprise-workload-vmss-prod"
+subnet_id           = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-enterprise-network-hub-prod/providers/Microsoft.Network/virtualNetworks/vnet-spoke-app-prod/subnets/snet-app-tier"
+admin_username      = "azureadmin"
+ssh_public_key      = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC3... yogesh@enterprise-arch"
+
+tags = {
+  Environment = "Production"
+  Architect   = "Yogesh Pujari"
+  ManagedBy   = "Terraform"
+  FinOpsTier  = "Dynamic-Autoscale"
+}
+
+vm_scale_sets = {
+  api_gateway_vmss = {
+    name            = "vmss-apigateway-prod"
+    sku             = "Standard_D4ds_v5"
+    instances       = 3
+    zones           = ["1", "2", "3"]
+    upgrade_mode    = "Automatic"
+    os_disk_type    = "Premium_LRS"
+    os_disk_size_gb = 128
+    custom_data     = null
+    autoscale_config = {
+      min_instances     = 3
+      max_instances     = 15
+      default_instances = 3
+      cpu_scale_out_pct = 75
+      cpu_scale_in_pct  = 25
+    }
+  }
+
+  background_worker_vmss = {
+    name            = "vmss-worker-prod"
+    sku             = "Standard_D8ds_v5"
+    instances       = 2
+    zones           = ["1", "2"]
+    upgrade_mode    = "Automatic"
+    os_disk_type    = "StandardSSD_LRS" # FinOps optimized disk tier
+    os_disk_size_gb = 128
+    custom_data     = null
+    autoscale_config = {
+      min_instances     = 2
+      max_instances     = 8
+      default_instances = 2
+      cpu_scale_out_pct = 80
+      cpu_scale_in_pct  = 20
+    }
+  }
+}
