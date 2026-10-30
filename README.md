@@ -22,19 +22,10 @@
 <!-- ============================================================ -->
 <!-- 📍 ELEGANT PILL BADGES (MATCHING REFERENCE DESIGN)           -->
 <!-- ============================================================ -->
-<a href="https://linkedin.com/in/yogesh-pujari" target="_blank">
-  <img src="https://img.shields.io/badge/LINKEDIN-CONNECT-0A66C2?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn" />
-</a>
-&nbsp;
-<a href="https://github.com/yogeshpujari0905-droid">
-  <img src="https://img.shields.io/badge/GITHUB-PROJECTS-181717?style=flat-square&logo=github&logoColor=white" alt="GitHub" />
-</a>
-&nbsp;
-<a href="mailto:yogeshpujari0905@gmail.com">
-  <img src="https://img.shields.io/badge/EMAIL-CONTACT-EA4335?style=flat-square&logo=gmail&logoColor=white" alt="Email" />
-</a>
-&nbsp;
-<img src="https://img.shields.io/badge/LOCATION-INDIA%20%2F%20OPEN%20TO%20GLOBAL%20REMOTE-0078D4?style=flat-square&logo=google-maps&logoColor=white" alt="Location" />
+<a href="https://linkedin.com/in/ycpujari-devops" target="_blank"><img src="https://img.shields.io/badge/LINKEDIN-CONNECT-0A66C2?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn" /></a>
+<a href="https://github.com/yogeshpujari0905-droid?tab=repositories" target="_blank"><img src="https://img.shields.io/badge/GITHUB-PROJECTS-181717?style=flat-square&logo=github&logoColor=white" alt="GitHub" /></a>
+<a href="mailto:yogeshpujari0905@gmail.com"><img src="https://img.shields.io/badge/EMAIL-CONTACT-EA4335?style=flat-square&logo=gmail&logoColor=white" alt="Email" /></a>
+<img src="https://img.shields.io/badge/LOCATION-PUNE%2C%20INDIA-0078D4?style=flat-square&logo=google-maps&logoColor=white" alt="Location" />
 
 </div>
 
@@ -426,17 +417,11 @@ I am always open to discussing **Enterprise Cloud Migrations**, **Zero-Trust Dev
 
 <div align="center">
 
-<a href="https://linkedin.com/in/yogesh-pujari" target="_blank">
-  <img src="https://img.shields.io/badge/LINKEDIN-CONNECT-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" />
-</a>
+<a href="https://linkedin.com/in/ycpujari-devops" target="_blank"><img src="https://img.shields.io/badge/LINKEDIN-CONNECT-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" /></a>
 &nbsp;&nbsp;
-<a href="mailto:yogeshpujari0905@gmail.com">
-  <img src="https://img.shields.io/badge/EMAIL-yogeshpujari0905%40gmail.com-EA4335?style=for-the-badge&logo=gmail&logoColor=white" alt="Email" />
-</a>
+<a href="mailto:yogeshpujari0905@gmail.com"><img src="https://img.shields.io/badge/EMAIL-yogeshpujari0905%40gmail.com-EA4335?style=for-the-badge&logo=gmail&logoColor=white" alt="Email" /></a>
 &nbsp;&nbsp;
-<a href="https://github.com/yogeshpujari0905-droid">
-  <img src="https://img.shields.io/badge/GITHUB-PROJECTS-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
-</a>
+<a href="https://github.com/yogeshpujari0905-droid?tab=repositories" target="_blank"><img src="https://img.shields.io/badge/GITHUB-PROJECTS-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" /></a>
 
 <br/><br/>
 
